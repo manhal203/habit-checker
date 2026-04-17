@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HabitModel {
 
- int get id; String get firstName; String get lastName;
+ String get id; String get userId; String get title; String get description; String get createdAt; List<HabitLogModel> get habitLogs;
 /// Create a copy of HabitModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $HabitModelCopyWith<HabitModel> get copyWith => _$HabitModelCopyWithImpl<HabitMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HabitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HabitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other.habitLogs, habitLogs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
+int get hashCode => Object.hash(runtimeType,id,userId,title,description,createdAt,const DeepCollectionEquality().hash(habitLogs));
 
 @override
 String toString() {
-  return 'HabitModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'HabitModel(id: $id, userId: $userId, title: $title, description: $description, createdAt: $createdAt, habitLogs: $habitLogs)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $HabitModelCopyWith<$Res>  {
   factory $HabitModelCopyWith(HabitModel value, $Res Function(HabitModel) _then) = _$HabitModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String firstName, String lastName
+ String id, String userId, String title, String description, String createdAt, List<HabitLogModel> habitLogs
 });
 
 
@@ -65,12 +65,15 @@ class _$HabitModelCopyWithImpl<$Res>
 
 /// Create a copy of HabitModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? title = null,Object? description = null,Object? createdAt = null,Object? habitLogs = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String,habitLogs: null == habitLogs ? _self.habitLogs : habitLogs // ignore: cast_nullable_to_non_nullable
+as List<HabitLogModel>,
   ));
 }
 
@@ -155,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String userId,  String title,  String description,  String createdAt,  List<HabitLogModel> habitLogs)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HabitModel() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.userId,_that.title,_that.description,_that.createdAt,_that.habitLogs);case _:
   return orElse();
 
 }
@@ -176,10 +179,10 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String userId,  String title,  String description,  String createdAt,  List<HabitLogModel> habitLogs)  $default,) {final _that = this;
 switch (_that) {
 case _HabitModel():
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.userId,_that.title,_that.description,_that.createdAt,_that.habitLogs);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +199,10 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String firstName,  String lastName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String userId,  String title,  String description,  String createdAt,  List<HabitLogModel> habitLogs)?  $default,) {final _that = this;
 switch (_that) {
 case _HabitModel() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.userId,_that.title,_that.description,_that.createdAt,_that.habitLogs);case _:
   return null;
 
 }
@@ -208,15 +211,24 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(fieldRename: .snake)
 class _HabitModel implements HabitModel {
-  const _HabitModel({required this.id, required this.firstName, required this.lastName});
+  const _HabitModel({required this.id, required this.userId, required this.title, required this.description, required this.createdAt, required final  List<HabitLogModel> habitLogs}): _habitLogs = habitLogs;
   factory _HabitModel.fromJson(Map<String, dynamic> json) => _$HabitModelFromJson(json);
 
-@override final  int id;
-@override final  String firstName;
-@override final  String lastName;
+@override final  String id;
+@override final  String userId;
+@override final  String title;
+@override final  String description;
+@override final  String createdAt;
+ final  List<HabitLogModel> _habitLogs;
+@override List<HabitLogModel> get habitLogs {
+  if (_habitLogs is EqualUnmodifiableListView) return _habitLogs;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_habitLogs);
+}
+
 
 /// Create a copy of HabitModel
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HabitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HabitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other._habitLogs, _habitLogs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
+int get hashCode => Object.hash(runtimeType,id,userId,title,description,createdAt,const DeepCollectionEquality().hash(_habitLogs));
 
 @override
 String toString() {
-  return 'HabitModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'HabitModel(id: $id, userId: $userId, title: $title, description: $description, createdAt: $createdAt, habitLogs: $habitLogs)';
 }
 
 
@@ -251,7 +263,7 @@ abstract mixin class _$HabitModelCopyWith<$Res> implements $HabitModelCopyWith<$
   factory _$HabitModelCopyWith(_HabitModel value, $Res Function(_HabitModel) _then) = __$HabitModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String firstName, String lastName
+ String id, String userId, String title, String description, String createdAt, List<HabitLogModel> habitLogs
 });
 
 
@@ -268,12 +280,15 @@ class __$HabitModelCopyWithImpl<$Res>
 
 /// Create a copy of HabitModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? title = null,Object? description = null,Object? createdAt = null,Object? habitLogs = null,}) {
   return _then(_HabitModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String,habitLogs: null == habitLogs ? _self._habitLogs : habitLogs // ignore: cast_nullable_to_non_nullable
+as List<HabitLogModel>,
   ));
 }
 

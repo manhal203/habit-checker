@@ -30,11 +30,12 @@ class SignUpRemoteDataSource implements BaseSignUpRemoteDataSource {
 
     await _supabase.from('profiles').insert({
       "id": dataAuthUser.user!.id,
-      "phone": '966$phone',
+      "phone_number": '966$phone',
       "auth_id": dataAuthUser.user!.id,
       "full_name": fullName,
       "email": email,
     });
+
     return true;
   }
 }

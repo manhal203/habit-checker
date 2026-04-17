@@ -11,7 +11,7 @@ class HabitUseCase {
 
   HabitUseCase(this._repositoryData);
 
-   Future<Result<HabitEntity, Failure>> getHabit() async {
+   Future<Result<List<HabitEntity>, Failure>> getHabit() async {
     return _repositoryData.getHabit();
   }
 }

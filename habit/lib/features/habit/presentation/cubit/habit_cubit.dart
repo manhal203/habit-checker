@@ -5,16 +5,18 @@ import 'package:habit/features/habit/presentation/cubit/habit_state.dart';
 class HabitCubit extends Cubit<HabitState> {
   final HabitUseCase _habitUseCase;
 
-  HabitCubit(this._habitUseCase) : super(HabitInitialState());
+  HabitCubit(this._habitUseCase) : super(HabitInitialState()) {
+    getHabitMethod();
+  }
 
   Future<void> getHabitMethod() async {
     final result = await _habitUseCase.getHabit();
     result.when(
       (success) {
-        //here is when success result
+        emit(HabitSuccessState(habits: success));
       },
       (whenError) {
-       //here is when error result
+        emit(HabitErrorState(message: whenError.message));
       },
     );
   }
