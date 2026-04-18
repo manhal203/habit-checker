@@ -11,10 +11,13 @@ class LoginCubit extends Cubit<LoginState> {
     required String email,
     required String password,
   }) async {
+    emit(LoginLoadingState());
+
     final result = await _loginUseCase.getLogin(
       email: email,
       password: password,
     );
+
     result.when(
       (success) {
         emit(LoginSuccessState());

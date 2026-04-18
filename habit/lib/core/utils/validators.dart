@@ -1,3 +1,5 @@
+import 'package:email_validator/email_validator.dart';
+
 // validators.dart
 class Validators {
   Validators._();
@@ -6,8 +8,7 @@ class Validators {
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
-    final emailRegex = RegExp(r'^[w-.]+@([w-]+.)+[w-]{2,4}$');
-    if (!emailRegex.hasMatch(value)) {
+    if (!EmailValidator.validate(value)) {
       return 'Invalid email address';
     }
     return null;
@@ -42,17 +43,10 @@ class Validators {
   }
 
 
-   static String? validateFullName(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'Full name is required';
+   static String? validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Name is required';
     }
-
-    final words = value.trim().split(RegExp(r'\s+'));
-
-    if (words.length < 2) {
-      return 'Please enter your full name (at least 2 words)';
-    }
-
     return null;
   }
 

@@ -1,9 +1,11 @@
+import 'package:any_image_view/any_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:habit/core/extensions/context_extensions.dart';
 import 'package:habit/core/navigation/routers.dart';
+import 'package:habit/core/utils/validators.dart';
 import 'package:habit/core/widgets/button/custom_button.dart';
 import 'package:habit/core/widgets/field/custom_field.dart';
 import 'package:habit/features/login/presentation/cubit/login_cubit.dart';
@@ -14,12 +16,11 @@ class LoginFeatureScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
+    final emailController = useTextEditingController(text: "Manhal@gmail.com");
+    final passwordController = useTextEditingController(text: "12341234");
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F0FF),
-      appBar: AppBar(title: const Text('Login Screen')),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
@@ -40,23 +41,41 @@ class LoginFeatureScreen extends HookWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
+              spacing: 16,
               children: [
+                AnyImageView(
+                  imagePath: 'assets/images/logo/habit_logo.png',
+                  height: 200,
+                  width: 200,
+                ),
                 CustomField(
                   controller: emailController,
-                  title: "Enter Your Email",
+                  title: "Email",
+                  icon: Icons.email_outlined,
+                  validator: Validators.validateEmail,
                 ),
                 CustomField(
                   controller: passwordController,
-                  title: "Enter Your Password",
+                  title: "Password",
+                  icon: Icons.lock_outline_rounded,
+                  obscureText: true,
+                  validator: Validators.validatePassword,
                 ),
-                SizedBox(height: 20),
+
+                SizedBox(height: 8),
                 CustomButton(
-                  title: "Login",
+                  title: "Log in",
                   onPressed: () {
                     cubit.getLoginMethod(
                       email: emailController.text,
                       password: passwordController.text,
                     );
+                  },
+                ),
+                CustomButton(
+                  title: "Sign Up",
+                  onPressed: () {
+                    context.go(Routes.signUp);
                   },
                 ),
               ],

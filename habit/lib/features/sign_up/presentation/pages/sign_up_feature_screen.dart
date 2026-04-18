@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import 'package:habit/core/widgets/button/custom_button.dart';
 import 'package:habit/core/widgets/field/custom_field.dart';
 import 'package:habit/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:any_image_view/any_image_view.dart';
 import 'package:habit/features/sign_up/presentation/cubit/sign_up_state.dart';
 
 class SignUpFeatureScreen extends HookWidget {
@@ -15,16 +17,17 @@ class SignUpFeatureScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<SignUpCubit>();
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
-    final fullNameController = useTextEditingController();
-    final phoneController = useTextEditingController();
+    final emailController = useTextEditingController(text: 'Manhal@gmail.com');
+    final passwordController = useTextEditingController(text: '12341234');
+    final usernameController = useTextEditingController(
+      text: 'Manhal Alsubaie',
+    );
+    final phoneController = useTextEditingController(text: '501234567');
 
     final keyField = GlobalKey<FormState>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F0FF),
-      appBar: AppBar(title: const Text('SignUp Screen')),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: BlocListener<SignUpCubit, SignUpState>(
           listener: (context, state) {
@@ -35,7 +38,6 @@ class SignUpFeatureScreen extends HookWidget {
 
               case SignUpSuccessState _:
                 context.go(Routes.login);
-              //context.showSnackBar("SignUp Done", isError: false);
 
               case SignUpErrorState _:
                 context.showSnackBar(state.message, isError: true);
@@ -48,37 +50,60 @@ class SignUpFeatureScreen extends HookWidget {
             child: Form(
               key: keyField,
               child: Column(
+                spacing: 16,
                 children: [
+                  AnyImageView(
+                    imagePath: 'assets/images/logo/habit_logo.png',
+                    height: 200,
+                    width: 200,
+                  ),
+
                   CustomField(
-                    controller: fullNameController,
-                    title: "Enter Your Full Name",
-                    validator: Validators.validateFullName,
+                    controller: usernameController,
+                    title: "Username",
+                    validator: Validators.validateName,
+                    icon: Icons.person,
                   ),
                   CustomField(
                     controller: emailController,
-                    title: "Enter Your Email",
+                    title: "Email",
                     validator: Validators.validateEmail,
+                    icon: Icons.email_outlined,
                   ),
                   CustomField(
                     controller: phoneController,
-                    title: "Enter Your Phone",
+                    title: "Phone",
                     validator: Validators.validatePhone,
+                    icon: Icons.phone_iphone,
+                    isNumber: true,
                   ),
                   CustomField(
                     controller: passwordController,
-                    title: "Enter Your Password",
+                    title: "Password",
                     validator: Validators.validatePassword,
+                    icon: Icons.lock_outline_rounded,
+                    obscureText: true,
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 8),
                   CustomButton(
-                    title: "Create Account",
+                    title: "Sign up",
                     onPressed: () {
-                      cubit.getSignUpMethod(
-                        fullName: fullNameController.text,
-                        email: emailController.text,
-                        phone: phoneController.text,
-                        password: passwordController.text,
-                      );
+                      log(keyField.currentState!.validate().toString());
+                      if (keyField.currentState!.validate()) {
+                        cubit.getSignUpMethod(
+                          username: usernameController.text,
+                          email: emailController.text,
+                          phone: phoneController.text,
+                          password: passwordController.text,
+                        );
+                      }
+                    },
+                  ),
+
+                  CustomButton(
+                    title: "Log in",
+                    onPressed: () {
+                      context.go(Routes.login);
                     },
                   ),
                 ],

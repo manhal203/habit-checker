@@ -8,7 +8,6 @@ import 'core/navigation/app_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await EasyLocalization.ensureInitialized();
   await setup();
   await configureDependencies();
@@ -38,7 +37,8 @@ class MainApp extends StatelessWidget {
           // themeMode: state.themeMode,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          debugShowCheckedModeBanner: true,
+          debugShowCheckedModeBanner: false,
+          
         );
       },
     );

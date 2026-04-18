@@ -1,18 +1,158 @@
+import 'package:any_image_view/any_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:habit/core/navigation/routers.dart';
+import 'package:habit/core/widgets/card/habit_card.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_cubit.dart';
+import 'package:habit/features/habit/presentation/cubit/habit_state.dart';
+import 'package:lottie/lottie.dart';
 
 class HabitFeatureScreen extends StatelessWidget {
   const HabitFeatureScreen({super.key});
   @override
   Widget build(BuildContext context) {
-      final _ = context.read<HabitCubit>();
+    final cubit = context.read<HabitCubit>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Habit Feature Screen')),
-      body: Column(children: [
-          
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 200, 243, 146),
+        foregroundColor: Colors.white,
+        elevation: 4,
+        shape: CircleBorder(),
+        child: Icon(Icons.add, size: 40),
+        onPressed: () async {
+          context.push(Routes.addHabit).then((value) {
+            if (value == true) {
+              cubit.getHabitMethod();
+            }
+          });
+        },
+      ),
+      appBar: AppBar(
+        title: AnyImageView(
+          imagePath: 'assets/images/logo/habit_logo.png',
+          height: 60,
+          width: 60,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.go(Routes.login);
+            },
+            icon: Icon(Icons.exit_to_app, color: Colors.redAccent),
+          ),
         ],
+      ),
+      body: BlocListener<HabitCubit, HabitState>(
+        listener: (context, state) {
+          if (state is DoneHabitSuccessState) {
+            context.read<HabitCubit>().getHabitMethod();
+          }
+          if (state is DeleteHabitSuccessState) {
+            context.read<HabitCubit>().getHabitMethod();
+          }
+        },
+        child: BlocBuilder<HabitCubit, HabitState>(
+          builder: (context, state) {
+            if (state is HabitIsEmptyState) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset(
+                      'assets/Animations/empty ghost.json',
+                      height: 300,
+                    ),
+
+                    Text(
+                      "Start a new habit",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(255, 170, 210, 125),
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+
+                    SizedBox(height: 6),
+
+                    Text(
+                      "Track your daily habits",
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              );
+            } else if (state is HabitSuccessState) {
+              return Column(
+                children: [
+                  SizedBox(height: 20),
+
+                  Text(
+                    "Your habits for today",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 170, 210, 125),
+                    ),
+                  ),
+
+                  SizedBox(height: 4),
+                  Text(
+                    state.today,
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: state.habits.length,
+                      itemBuilder: (context, index) {
+                        final habit = state.habits[index];
+
+                        final todayLog = habit.habitLog
+                            .where((log) => log.logDate == state.today)
+                            .toList();
+
+                        return Dismissible(
+                          direction: .endToStart,
+                          key: ValueKey(habit.id),
+
+                          background: Container(
+                            color: Colors.red,
+                            alignment: Alignment.centerLeft,
+                            padding: .only(left: 20),
+
+                            child: Icon(Icons.delete, color: Colors.white),
+                          ),
+
+                          onDismissed: (direction) {
+                            cubit.deleteHabitMethod(habitId: habit.id);
+                          },
+
+                          child: HabitCard(
+                            title: habit.title,
+                            description: habit.description,
+                            isCompleted: todayLog.isEmpty
+                                ? false
+                                : todayLog.first.isCompleted,
+                            onChanged: (value) {
+                              cubit.doneHabitMethod(
+                                habitId: habit.id,
+                                isCompleted: value,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }
+            return SizedBox.shrink();
+          },
+        ),
       ),
     );
   }

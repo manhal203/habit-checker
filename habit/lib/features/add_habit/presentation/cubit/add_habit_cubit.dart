@@ -7,14 +7,23 @@ class AddHabitCubit extends Cubit<AddHabitState> {
 
   AddHabitCubit(this._addHabitUseCase) : super(AddHabitInitialState());
 
-  Future<void> getAddHabitMethod() async {
-    final result = await _addHabitUseCase.getAddHabit();
+  Future<void> getAddHabitMethod({
+    required String title,
+    required String description,
+  }) async {
+    emit(AddHabitLoadingState());
+
+    final result = await _addHabitUseCase.getAddHabit(
+      title: title,
+      description: description,
+    );
+
     result.when(
       (success) {
-        //here is when success result
+        emit(AddHabitSuccessState());
       },
       (whenError) {
-       //here is when error result
+        emit(AddHabitErrorState(message: whenError.message));
       },
     );
   }

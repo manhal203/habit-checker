@@ -5,7 +5,7 @@ abstract class BaseSignUpRemoteDataSource {
   Future<bool> getSignUp({
     required String email,
     required String password,
-    required String fullName,
+    required String username,
     required String phone,
   });
 }
@@ -20,7 +20,7 @@ class SignUpRemoteDataSource implements BaseSignUpRemoteDataSource {
   Future<bool> getSignUp({
     required String email,
     required String password,
-    required String fullName,
+    required String username,
     required String phone,
   }) async {
     final dataAuthUser = await _supabase.auth.signUp(
@@ -30,11 +30,11 @@ class SignUpRemoteDataSource implements BaseSignUpRemoteDataSource {
 
     await _supabase.from('profiles').insert({
       "id": dataAuthUser.user!.id,
-      "phone": '966$phone',
-      "auth_id": dataAuthUser.user!.id,
-      "full_name": fullName,
+      "phone_number": '966$phone',
+      "username": username,
       "email": email,
     });
+
     return true;
   }
 }

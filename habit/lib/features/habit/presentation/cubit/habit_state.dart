@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:habit/features/habit/domain/entities/habit_entity.dart';
 
 abstract class HabitState extends Equatable {
   const HabitState();
@@ -8,7 +9,21 @@ abstract class HabitState extends Equatable {
 }
 
 class HabitInitialState extends HabitState {}
-class HabitSuccessState extends HabitState {}
+
+class HabitSuccessState extends HabitState {
+  final List<HabitEntity> habits;
+  final String today;
+  const HabitSuccessState({required this.habits, required this.today});
+
+  @override
+  List<Object?> get props => [habits];
+}
+
+class HabitIsEmptyState extends HabitState {}
+
+class DoneHabitSuccessState extends HabitState {}
+
+class DeleteHabitSuccessState extends HabitState {}
 
 class HabitErrorState extends HabitState {
   final String message;
@@ -16,4 +31,3 @@ class HabitErrorState extends HabitState {
   @override
   List<Object?> get props => [message];
 }
-
