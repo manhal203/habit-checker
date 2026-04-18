@@ -27,13 +27,15 @@ class AddHabitFeatureScreen extends HookWidget {
             context.hideLoading();
             if (state is AddHabitLoadingState) {
               context.showLoading();
-            } else if (state is AddHabitSuccessState) {
+            }
+            if (state is AddHabitSuccessState) {
               context.showSnackBar(
                 "Habit has been successfully added",
                 isError: false,
               );
               context.pop(true);
-            } else if (state is AddHabitErrorState) {
+            }
+            if (state is AddHabitErrorState) {
               context.showSnackBar(state.message, isError: true);
             }
           },
@@ -44,11 +46,11 @@ class AddHabitFeatureScreen extends HookWidget {
                 CustomField(
                   controller: titleController,
                   title: 'Enter the Title of your New Habit',
-                  validator: Validators.validateName, 
+                  validator: Validators.validateName,
                 ),
                 CustomField(
                   controller: descriptionController,
-                  title: 'Add Description', 
+                  title: 'Add Description',
                 ),
                 FilledButton(
                   onPressed: () {
@@ -59,7 +61,7 @@ class AddHabitFeatureScreen extends HookWidget {
                       );
                     }
                   },
-                  child: Text("save")
+                  child: Text("save"),
                 ),
               ],
             ),

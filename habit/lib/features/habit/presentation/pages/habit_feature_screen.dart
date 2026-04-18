@@ -2,6 +2,8 @@ import 'package:any_image_view/any_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:habit/core/constants/app_colors.dart';
+import 'package:habit/core/extensions/context_extensions.dart';
 import 'package:habit/core/navigation/routers.dart';
 import 'package:habit/core/utils/formatters.dart';
 import 'package:habit/core/widgets/card/habit_card.dart';
@@ -46,33 +48,36 @@ class HabitFeatureScreen extends StatelessWidget {
       ),
       body: BlocListener<HabitCubit, HabitState>(
         listener: (context, state) {
-          if (state is DoneHabitSuccessState) {
+          if (state is DoneHabitSuccessState ||
+              state is DeleteHabitSuccessState) {
             context.read<HabitCubit>().getHabitMethod();
           }
-          if (state is DeleteHabitSuccessState) {
-            context.read<HabitCubit>().getHabitMethod();
+          if (state is HabitErrorState) {
+            context.showSnackBar(state.message);
           }
         },
         child: BlocBuilder<HabitCubit, HabitState>(
           builder: (context, state) {
             if (state is HabitSuccessState) {
-              return Column(
-                children: [
-                  SizedBox(height: 20),
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
 
-                  Text(
-                    "Your habits for today ($todayDate)",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 170, 210, 125),
+                    Text(
+                      "Your habits for today ($todayDate)",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 170, 210, 125),
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                  Expanded(
-                    child: ListView.builder(
+                    ListView.builder(
+                      primary: false,
+                      shrinkWrap: true,
                       itemCount: state.habits.length,
                       itemBuilder: (context, index) {
                         final habit = state.habits[index];
@@ -96,24 +101,75 @@ class HabitFeatureScreen extends StatelessWidget {
                             cubit.deleteHabitMethod(habitId: habit.id);
                           },
 
-                          child: HabitCard(
-                            title: habit.title,
-                            description: habit.description,
-                            isCompleted: todayLog.isEmpty
-                                ? false
-                                : todayLog.first.isCompleted,
-                            onChanged: (value) {
-                              cubit.doneHabitMethod(
-                                habitId: habit.id,
-                                isCompleted: value,
-                              );
+                          child: InkWell(
+                            onTap: () {
+                              if (habit.habitLog.isNotEmpty) {
+                                context.showBottomSheet(
+                                  widget: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Habit History",
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            color: Color.fromARGB(
+                                              255,
+                                              170,
+                                              210,
+                                              125,
+                                            ),
+                                            fontWeight: .bold,
+                                          ),
+                                        ),
+
+                                        Divider(),
+
+                                        ...habit.habitLog.map(
+                                          (item) => Column(
+                                            children: [
+                                              ListTile(
+                                                title: Text(item.logDate),
+                                                trailing: Icon(
+                                                  item.isCompleted
+                                                      ? Icons
+                                                            .check_circle_outline
+                                                      : Icons.cancel_outlined,
+                                                  color: item.isCompleted
+                                                      ? Colors.green
+                                                      : Colors.red,
+                                                ),
+                                              ),
+                                              Divider(
+                                                color: AppColors.textHint,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
                             },
+                            child: HabitCard(
+                              title: habit.title,
+                              description: habit.description,
+                              isCompleted: todayLog.isEmpty
+                                  ? false
+                                  : todayLog.first.isCompleted,
+                              onChanged: (value) {
+                                cubit.doneHabitMethod(
+                                  habitId: habit.id,
+                                  isCompleted: value,
+                                );
+                              },
+                            ),
                           ),
                         );
                       },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             }
             return Center(child: Text("Add new Habit"));
