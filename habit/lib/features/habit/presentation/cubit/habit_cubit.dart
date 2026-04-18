@@ -13,7 +13,8 @@ class HabitCubit extends Cubit<HabitState> {
     final result = await _habitUseCase.getHabit();
     result.when(
       (success) {
-        emit(HabitSuccessState(habits: success));
+        final today = DateTime.now().toIso8601String().split('T').first;
+        emit(HabitSuccessState(habits: success, today: today));
       },
       (whenError) {
         emit(HabitErrorState(message: whenError.message));
@@ -32,6 +33,18 @@ class HabitCubit extends Cubit<HabitState> {
     result.when(
       (success) {
         emit(DoneHabitSuccessState());
+      },
+      (whenError) {
+        emit(HabitErrorState(message: whenError.message));
+      },
+    );
+  }
+
+  Future<void> deleteHabitMethod({required String habitId}) async {
+    final result = await _habitUseCase.deleteHabitMethod(habitId: habitId);
+    result.when(
+      (success) {
+        emit(DeleteHabitSuccessState());
       },
       (whenError) {
         emit(HabitErrorState(message: whenError.message));

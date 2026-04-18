@@ -21,18 +21,11 @@ class AddHabitRemoteDataSource implements BaseAddHabitRemoteDataSource {
   }) async {
     try {
       final userId = _supabase.auth.currentUser!.id;
-      final response = await _supabase
-          .from("habits")
-          .insert({
-            "user_id": userId,
-            "title": title,
-            "description": description,
-          })
-          .select("id")
-          .single();
 
-      await _supabase.from("habit_logs").insert({
-        "habit_id": response['id'],
+      await _supabase.from("habits").insert({
+        "user_id": userId,
+        "title": title,
+        "description": description,
       }).select();
 
       return true;

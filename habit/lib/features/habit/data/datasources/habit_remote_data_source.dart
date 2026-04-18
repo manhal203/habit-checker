@@ -1,4 +1,3 @@
-import 'package:habit/core/extensions/string_extensions.dart';
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:habit/features/habit/data/models/habit_model.dart';
@@ -7,6 +6,7 @@ import 'package:habit/core/errors/network_exceptions.dart';
 abstract class BaseHabitRemoteDataSource {
   Future<List<HabitModel>> getHabit();
   Future<bool> doneHabit({required String habitId, required bool isCompleted});
+  Future<bool> deleteHabit({required String habitId});
 }
 
 @LazySingleton(as: BaseHabitRemoteDataSource)
@@ -18,18 +18,6 @@ class HabitRemoteDataSource implements BaseHabitRemoteDataSource {
   Future<List<HabitModel>> getHabit() async {
     try {
       final userId = _supabase.auth.currentUser!.id;
-
-      // final habits = await _supabase
-      //     .from("habits")
-      //     .select("*")
-      //     .eq("user_id", userId);
-      // for (var habit in habits) {
-      //   await _supabase.from("habit_logs").upsert({
-      //     "habit_id": habit["id"],
-      //     "is_completed": false,
-      //   });
-      // }
-
       final response = await _supabase
           .from("habits")
           .select("*,habit_logs(*)")
@@ -47,14 +35,45 @@ class HabitRemoteDataSource implements BaseHabitRemoteDataSource {
     required bool isCompleted,
   }) async {
     try {
-      await _supabase
+      final today = DateTime.now().toIso8601String().split("T").first;
+      final existingLog = await _supabase
           .from("habit_logs")
-          .update({"is_completed": isCompleted})
-          .eq('habit_id', habitId);
+          .select()
+          .eq("habit_id", habitId)
+          .eq("log_date", today)
+          .maybeSingle();
+
+      if (existingLog == null) {
+        await _supabase.from('habit_logs').insert({
+          "habit_id": habitId,
+          "log_date": today,
+          "is_completed": isCompleted,
+        });
+      } else {
+        await _supabase
+            .from('habit_logs')
+            .update({"is_completed": isCompleted})
+            .eq("id", existingLog['id']);
+      }
 
       return true;
     } catch (error) {
-      print(error);
+      throw FailureExceptions.getException(error);
+    }
+  }
+
+  @override
+  Future<bool> deleteHabit({required String habitId}) async {
+    try {
+      final userId = _supabase.auth.currentUser!.id;
+      await _supabase
+          .from("habits")
+          .delete()
+          .eq("user_id", userId)
+          .eq("id", habitId);
+
+      return true;
+    } catch (error) {
       throw FailureExceptions.getException(error);
     }
   }

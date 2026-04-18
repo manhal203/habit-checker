@@ -16,7 +16,9 @@ class HabitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      
       color: Colors.blue,
+      
       child: Column(
         children: [
           Text(title),
@@ -24,7 +26,7 @@ class HabitCard extends StatelessWidget {
           Checkbox(
             value: isCompleted,
             onChanged: (value) {
-              onChanged(!isCompleted);
+              onChanged(value!);
             },
           ),
         ],

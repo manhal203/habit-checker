@@ -35,4 +35,14 @@ class HabitRepositoryData implements HabitRepositoryDomain {
       return Error(FailureExceptions.getException(error));
     }
   }
+  
+  @override
+  Future<Result<bool, Failure>> deleteHabitMethod({required String habitId}) async {
+    try {
+      final response = await remoteDataSource.deleteHabit(habitId: habitId);
+      return Success(response);
+    } catch (error) {
+      return Error(FailureExceptions.getException(error));
+    }
+  }
 }
