@@ -14,8 +14,8 @@ class LoginFeatureScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
+    final emailController = useTextEditingController(text: "moayad@gmail.com");
+    final passwordController = useTextEditingController(text: "123123123");
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F0FF),
