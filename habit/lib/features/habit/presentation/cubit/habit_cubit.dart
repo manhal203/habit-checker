@@ -21,6 +21,24 @@ class HabitCubit extends Cubit<HabitState> {
     );
   }
 
+  Future<void> doneHabitMethod({
+    required String habitId,
+    required bool isCompleted,
+  }) async {
+    final result = await _habitUseCase.doneHabit(
+      habitId: habitId,
+      isCompleted: isCompleted,
+    );
+    result.when(
+      (success) {
+        emit(DoneHabitSuccessState());
+      },
+      (whenError) {
+        emit(HabitErrorState(message: whenError.message));
+      },
+    );
+  }
+
   @override
   Future<void> close() {
     //here is when close cubit

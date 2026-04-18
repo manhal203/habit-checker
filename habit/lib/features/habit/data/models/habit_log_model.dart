@@ -19,6 +19,6 @@ abstract class HabitLogModel with _$HabitLogModel {
 
 extension HabitLogEntityMapper on HabitLogModel {
   HabitLogEntity toEntity() {
-    return HabitLogEntity(id: id, isCompleted: isCompleted);
+    return HabitLogEntity(id: id, isCompleted: isCompleted,habitId: habitId);
   }
 }

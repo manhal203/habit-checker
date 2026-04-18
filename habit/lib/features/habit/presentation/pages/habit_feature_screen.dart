@@ -23,22 +23,36 @@ class HabitFeatureScreen extends StatelessWidget {
         },
       ),
       appBar: AppBar(title: const Text('Habit Feature Screen')),
-      body: BlocBuilder<HabitCubit, HabitState>(
-        builder: (context, state) {
-          if (state is HabitSuccessState) {
-            return ListView.builder(
-              itemCount: state.habits.length,
-              itemBuilder: (context, index) {
-                final habit = state.habits[index];
-                return HabitCard(
-                  title: habit.title,
-                  description: habit.description,
-                );
-              },
-            );
+      body: BlocListener<HabitCubit, HabitState>(
+        listener: (context, state) {
+          if (state is DoneHabitSuccessState) {
+            cubit.getHabitMethod();
           }
-          return Text("Create new Habit");
         },
+        child: BlocBuilder<HabitCubit, HabitState>(
+          builder: (context, state) {
+            if (state is HabitSuccessState) {
+              return ListView.builder(
+                itemCount: state.habits.length,
+                itemBuilder: (context, index) {
+                  final habit = state.habits[index];
+                  return HabitCard(
+                    title: habit.title,
+                    description: habit.description,
+                    isCompleted: habit.habitLog.last.isCompleted,
+                    onChanged: (value) {
+                      cubit.doneHabitMethod(
+                        habitId: habit.habitLog.last.habitId,
+                        isCompleted: value,
+                      );
+                    },
+                  );
+                },
+              );
+            }
+            return Text("Create new Habit");
+          },
+        ),
       ),
     );
   }

@@ -18,6 +18,8 @@ class HabitSuccessState extends HabitState {
   List<Object?> get props => [habits];
 }
 
+class DoneHabitSuccessState extends HabitState {}
+
 class HabitErrorState extends HabitState {
   final String message;
   const HabitErrorState({required this.message});
