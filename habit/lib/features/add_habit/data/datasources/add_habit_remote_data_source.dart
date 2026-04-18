@@ -41,7 +41,7 @@ class AddHabitRemoteDataSource implements BaseAddHabitRemoteDataSource {
 
       await _supabase.from("habit_logs").insert({
         "habit_id": response['id'],
-        "log_date": DateTime.parse("2023-09-23").toIso8601String(),
+        "log_date": DateTime.parse("2024-09-23").toIso8601String(),
       }).select();
 
       return true;

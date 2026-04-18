@@ -16,11 +16,11 @@ class HabitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.blue,
+      color: const Color.fromARGB(255, 38, 122, 192),
       child: Column(
         children: [
-          Text(title),
-          Text(description),
+          Text(title, style: TextStyle(fontSize: 20, color: Colors.black),),
+          Text(description, style: TextStyle(fontSize: 16, color: const Color.fromARGB(161, 0, 0, 0)),),
           Checkbox(
             value: isCompleted,
             onChanged: (value) {
