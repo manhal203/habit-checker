@@ -42,17 +42,10 @@ class Validators {
   }
 
 
-   static String? validateFullName(String? value) {
+   static String? validateUsername(String? value) {
     if (value == null || value.trim().isEmpty) {
       return 'Full name is required';
     }
-
-    final words = value.trim().split(RegExp(r'\s+'));
-
-    if (words.length < 2) {
-      return 'Please enter your full name (at least 2 words)';
-    }
-
     return null;
   }
 

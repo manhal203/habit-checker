@@ -17,7 +17,7 @@ class SignUpFeatureScreen extends HookWidget {
     final cubit = context.read<SignUpCubit>();
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final fullNameController = useTextEditingController();
+    final usernameController = useTextEditingController();
     final phoneController = useTextEditingController();
 
     final keyField = GlobalKey<FormState>();
@@ -50,9 +50,9 @@ class SignUpFeatureScreen extends HookWidget {
               child: Column(
                 children: [
                   CustomField(
-                    controller: fullNameController,
-                    title: "Enter Your Full Name",
-                    validator: Validators.validateFullName,
+                    controller: usernameController,
+                    title: "Enter Your Username",
+                    validator: Validators.validateUsername,
                   ),
                   CustomField(
                     controller: emailController,
@@ -74,7 +74,7 @@ class SignUpFeatureScreen extends HookWidget {
                     title: "Create Account",
                     onPressed: () {
                       cubit.getSignUpMethod(
-                        fullName: fullNameController.text,
+                        username: usernameController.text,
                         email: emailController.text,
                         phone: phoneController.text,
                         password: passwordController.text,
