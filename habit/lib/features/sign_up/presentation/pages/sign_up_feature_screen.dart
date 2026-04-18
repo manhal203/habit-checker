@@ -52,7 +52,7 @@ class SignUpFeatureScreen extends HookWidget {
                   CustomField(
                     controller: usernameController,
                     title: "Enter Your Username",
-                    validator: Validators.validateUsername,
+                    validator: Validators.validateName,
                   ),
                   CustomField(
                     controller: emailController,

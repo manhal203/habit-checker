@@ -42,9 +42,9 @@ class Validators {
   }
 
 
-   static String? validateUsername(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'Full name is required';
+   static String? validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Name is required';
     }
     return null;
   }
