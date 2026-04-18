@@ -12,6 +12,7 @@ dependencies:
   device_info_plus: ^12.4.0
   dio: ^5.9.2
   easy_localization: ^3.0.8
+  email_validator: ^3.0.0
   equatable: ^2.0.8
   flutter:
     sdk: flutter
