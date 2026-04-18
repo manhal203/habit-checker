@@ -1,88 +1,119 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/-_M83IEE)
-## Personal Habit Tracker AppAssignment 📝🈂️
-### 🚀 Weekend Project: Personal Habit Tracker App
-Overall Project Goal: Build a complete daily habit tracking application to master basic CRUD operations, link tables with the Authentication system (Auth), and implement all of this within a Flutter environment using Clean Architecture and State Management with BLoC or Cubit.
+# Habit Checker ✅📊
+
+Habit Checker is a Flutter application designed to help users build and track daily habits.  
+The app allows users to create habits and mark daily completion using a clean and simple interface.
 
 ---
 
-## 🛠 Technologies Used
-##### 1. Frontend & App: Flutter
+## 📌 Project Overview 📖
 
-##### 2. State Management: BLoC / Cubit
+Project Name: Habit Checker
 
-##### 3. Architecture: Clean Architecture
+This app provides:
 
-##### 4. Backend & Database: Supabase (Auth, Postgres)
+- 🔐 User Authentication (Login & Sign Up)
+- 📝 Habit Management (Add & Delete habits)
+- ✅ Daily Habit Tracking (Mark habits as completed)
+- 📊 Progress Logging using Supabase database
+- 🔗 Real-time data synced per user account
 
-## 🗄️ Database Requirements (Supabase Schema)
-Students must build the following tables in Supabase and set up the relationships between them:
-
-#### 1.  profiles Table (Optional / Bonus):
-
-* id (UUID - Primary Key - Foreign Key to auth.users.id)
-
-* username (Text)
-
-* created_at (Timestamp)
-
-#### 2.  habits Table:
-
-* id (UUID - Primary Key)
-
-* title (Text - Habit name)
-
-* user_id (UUID - Foreign Key to auth.users.id)
-
-* created_at (Timestamp)
-
-#### 3.  habit_logs Table:
-
-* id (UUID - Primary Key)
-
-* habit_id (UUID - Foreign Key to habits.id - Cascade Delete)
-
-* log_date (Date)
-
-* is_completed (Boolean - Default: false)
-
-## 📱 Programming Requirements (Features & UI)
-### Authentication:
-
-Login and Sign Up interfaces using Email and Password.
-
-### Habits Management:
-
-* An interface to display the list of added habits for the currently logged-in user.
-
-* Ability to add a new habit (e.g., Drinking water, Reading, Walking).
-
-* Ability to delete a habit (ensuring its associated logs are automatically deleted).
-
-### Daily Logging:
-
-Next to each habit in the list, provide a button or Checkbox to mark whether the habit was completed for the day.
+The app ensures each user has their own personalized habit tracker with secure authentication.
 
 ---
 
-## 🧩 Advanced Technical Challenge (Join Query)
-Instead of making two separate queries (one to fetch habits, and another to fetch logs), the student is required to:
-* Write a single Join query in Supabase to fetch the "Habit" along with its "Completion Logs" in one combined list.
+## 📱 App Flow
 
- **Hint for students:🎭** Look up how to use foreign tables relationships in the supabase-flutter package to fetch nested data like this: supabase.from('habits').select(', habit_logs()').
+1. User opens the app
+2. Signs up or logs in
+3. Lands on Habits Screen
+4. Adds a new habit (e.g. Drink water, Read, Walk)
+5. Marks habit as completed daily using checkbox
+6. Data is stored and synced with Supabase
+
+---
+
+## 🧠 Features
+
+- 🔐 Email & Password Authentication (Supabase Auth)
+- 📝 Add new habits dynamically
+- 🗑 Delete habits
+- ✅ Daily completion tracking per habit
+- 📊 Habit logs stored in database
+- 🔄 Real-time data updates per user
+- 🧩 Clean Architecture (Data / Domain / Presentation)
+- ⚡ State Management using Cubit
 
 ---
 
-## 🏗️ Evaluation Criteria (Clean Architecture)
-The project will not be evaluated based on the UI alone, but on the code quality and structure:
+## 🗄 Database Structure (Supabase)
 
-#### * **Data Layer:** Must contain separate AuthRepository and HabitsRepository that interact directly with Supabase.
-
-#### * **Domain Layer:** Must contain the Models or Entities for Habits and Logs.
-
-#### * **Presentation Layer:** The User Interface (UI) must not contain any database-related code. Communication must be handled exclusively through Cubit or BLoC.
-
-#### Error Handling: Display clear error messages to the user in case of login failure or data fetching failure.
-
-Good luck to everyone, we look forward to seeing your creations! 🚀
+### 👤 profiles (Optional)
+- id (UUID, PK, FK → auth.users.id)
+- username (Text)
+- created_at (Timestamp)
 
 ---
+
+### 📝 habits
+- id (UUID, Primary Key)
+- title (Text)
+- user_id (UUID, FK → auth.users.id)
+- created_at (Timestamp)
+
+---
+
+### 📊 habit_logs
+- id (UUID, Primary Key)
+- habit_id (UUID, FK → habits.id)
+- log_date (Date)
+- is_completed (Boolean, default: false)
+
+---
+
+## 📸 Screenshots
+
+| Login | Sign Up |
+|---|---|
+| <img src="habit/assets/images/login.jpg" width="200"/> | <img src="assets/images/signup.jpg" width="200"/> |
+
+| Habits Screen | Add Habit |
+|---|---|
+| <img src="habit/assets/images/habit.jpg" width="200"/> | <img src="assets/images/add_habit.jpg" width="200"/> |
+
+| Empty State |
+|---|
+| <img src="habit/assets/images/empty.jpg" width="200"/> |
+
+---
+
+## 🎬 Demo Video
+
+Quick overview of Plantify AI functionality:
+
+https://github.com/user-attachments/assets/9c5cd0d1-97b7-4130-bca0-b26325cc93b8
+
+---
+
+## 📦 Packages Used
+
+- flutter_bloc
+- supabase_flutter
+- get_it
+- injectable
+- equatable
+- json_annotation
+- freezed
+- dio
+- go_router
+- any_image_view
+- uuid
+- lottie
+- flutter_launcher_icons
+
+---
+
+## ⚙️ Setup & Installation
+
+1. Clone the repository: `git clone `
+2. Install dependencies: `flutter pub get`
+3. Run the app: `flutter run`
