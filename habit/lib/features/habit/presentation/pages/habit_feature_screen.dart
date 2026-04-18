@@ -22,7 +22,17 @@ class HabitFeatureScreen extends StatelessWidget {
           });
         },
       ),
-      appBar: AppBar(title: const Text('Habit Feature Screen')),
+      appBar: AppBar(
+        title: const Text('Habit Feature Screen'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.go(Routes.login);
+            },
+            icon: Icon(Icons.exit_to_app, color: Colors.redAccent),
+          ),
+        ],
+      ),
       body: BlocListener<HabitCubit, HabitState>(
         listener: (context, state) {
           if (state is DoneHabitSuccessState) {
