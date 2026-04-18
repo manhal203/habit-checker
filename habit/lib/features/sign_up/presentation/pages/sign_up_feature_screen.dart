@@ -48,14 +48,14 @@ class SignUpFeatureScreen extends HookWidget {
             child: Form(
               key: keyField,
               child: Column(
+                spacing: 16,
                 children: [
                   AnyImageView(
                     imagePath: 'assets/images/logo/habit_logo.png',
                     height: 200,
                     width: 200,
                   ),
-                  SizedBox(height: 35),
-                  
+
                   CustomField(
                     controller: usernameController,
                     title: "Username",
@@ -82,7 +82,7 @@ class SignUpFeatureScreen extends HookWidget {
                     icon: Icons.lock_outline_rounded,
                     obscureText: true,
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: 8),
                   CustomButton(
                     title: "Sign up",
                     onPressed: () {
@@ -95,6 +95,13 @@ class SignUpFeatureScreen extends HookWidget {
                           password: passwordController.text,
                         );
                       }
+                    },
+                  ),
+
+                  CustomButton(
+                    title: "Log in",
+                    onPressed: () {
+                      context.go(Routes.login);
                     },
                   ),
                 ],
