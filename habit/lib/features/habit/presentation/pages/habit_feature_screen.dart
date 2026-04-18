@@ -13,7 +13,6 @@ class HabitFeatureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<HabitCubit>();
 
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 200, 243, 146),
@@ -29,6 +28,11 @@ class HabitFeatureScreen extends StatelessWidget {
         },
       ),
       appBar: AppBar(
+        title: AnyImageView(
+          imagePath: 'assets/images/logo/habit_logo.png',
+          height: 60,
+          width: 60,
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -52,20 +56,9 @@ class HabitFeatureScreen extends StatelessWidget {
             if (state is HabitSuccessState) {
               return Column(
                 children: [
-                  Padding(
-                    padding: .only(top: 20, bottom: 10),
-                    child: Center(
-                      child: AnyImageView(
-                        imagePath: 'assets/images/logo/habit_logo.png',
-                        height: 70,
-                        width: 70,
-                      ),
-                    ),
-                  ),
+                  SizedBox(height: 20),
 
-                 SizedBox(height: 10),
-
-                 Text(
+                  Text(
                     "Your habits for today",
                     style: TextStyle(
                       fontSize: 20,
@@ -74,7 +67,7 @@ class HabitFeatureScreen extends StatelessWidget {
                     ),
                   ),
 
-                 SizedBox(height: 10),
+                  SizedBox(height: 10),
 
                   Expanded(
                     child: ListView.builder(
@@ -94,10 +87,7 @@ class HabitFeatureScreen extends StatelessWidget {
                             color: Colors.red,
                             alignment: Alignment.centerRight,
                             padding: .only(right: 20),
-                            child:  Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                            ),
+                            child: Icon(Icons.delete, color: Colors.white),
                           ),
 
                           onDismissed: (direction) {
@@ -124,7 +114,7 @@ class HabitFeatureScreen extends StatelessWidget {
                 ],
               );
             }
-            return Center(child: Text("Create new Habit"));
+            return Center(child: Text("Add new Habit"));
           },
         ),
       ),

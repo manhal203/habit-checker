@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'package:habit/core/services/user_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:habit/core/errors/network_exceptions.dart';
