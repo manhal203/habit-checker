@@ -10,7 +10,7 @@ abstract class UserModel with _$UserModel {
     required String id,
     required String authId,
     required String email,
-    required String fullName,
+    required String username,
     required String phoneNumber,
     required String createdAt,
   }) = _UserModel;
@@ -25,7 +25,7 @@ extension UserModelMapper on UserModel {
       id: id,
       createdAt: createdAt,
       email: email,
-      fullName: fullName,
+      username: username,
       phoneNumber: phoneNumber,
     );
   }
