@@ -20,7 +20,7 @@ class HabitFeatureScreen extends StatelessWidget {
               cubit.getHabitMethod();
             }
           });
-        },
+        }, child: Text("+", style: TextStyle(fontSize: 40)),
       ),
       appBar: AppBar(
         title: const Text('Habit Feature Screen'),
