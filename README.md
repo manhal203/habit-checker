@@ -1,4 +1,4 @@
-# Habit Checker ✅📊
+# Habit Checker ✅
 
 Habit Checker is a Flutter application designed to help users build and track daily habits.  
 The app allows users to create habits and mark daily completion using a clean and simple interface.
@@ -47,7 +47,7 @@ The app ensures each user has their own personalized habit tracker with secure a
 
 ## 🗄 Database Structure (Supabase)
 
-### 👤 profiles (Optional)
+### 👤 profiles
 - id (UUID, PK, FK → auth.users.id)
 - username (Text)
 - created_at (Timestamp)
@@ -114,6 +114,6 @@ https://github.com/user-attachments/assets/9c5cd0d1-97b7-4130-bca0-b26325cc93b8
 
 ## ⚙️ Setup & Installation
 
-1. Clone the repository: `git clone `
+1. Clone the repository: `git clone https://github.com/flutter-gg-2026/personal-habit-tracker-app-m_group.git`
 2. Install dependencies: `flutter pub get`
 3. Run the app: `flutter run`
