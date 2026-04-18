@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import 'package:habit/core/widgets/button/custom_button.dart';
 import 'package:habit/core/widgets/field/custom_field.dart';
 import 'package:habit/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:any_image_view/any_image_view.dart';
 import 'package:habit/features/sign_up/presentation/cubit/sign_up_state.dart';
 
 class SignUpFeatureScreen extends HookWidget {
@@ -23,8 +25,7 @@ class SignUpFeatureScreen extends HookWidget {
     final keyField = GlobalKey<FormState>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F0FF),
-      appBar: AppBar(title: const Text('SignUp Screen')),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: BlocListener<SignUpCubit, SignUpState>(
           listener: (context, state) {
@@ -35,7 +36,6 @@ class SignUpFeatureScreen extends HookWidget {
 
               case SignUpSuccessState _:
                 context.go(Routes.login);
-              //context.showSnackBar("SignUp Done", isError: false);
 
               case SignUpErrorState _:
                 context.showSnackBar(state.message, isError: true);
@@ -49,29 +49,42 @@ class SignUpFeatureScreen extends HookWidget {
               key: keyField,
               child: Column(
                 children: [
+                  AnyImageView(
+                    imagePath: 'assets/images/logo/habit_logo.png',
+                    height: 200,
+                    width: 200,
+                  ),
+                  SizedBox(height: 35),
+                  
                   CustomField(
                     controller: fullNameController,
-                    title: "Enter Your Full Name",
+                    title: "Name",
                     validator: Validators.validateFullName,
+                    icon: Icons.person,
                   ),
                   CustomField(
                     controller: emailController,
-                    title: "Enter Your Email",
+                    title: "Email",
                     validator: Validators.validateEmail,
+                    icon: Icons.email_outlined,
                   ),
                   CustomField(
                     controller: phoneController,
-                    title: "Enter Your Phone",
+                    title: "Phone",
                     validator: Validators.validatePhone,
+                    icon: Icons.phone_iphone,
+                    isNumber: true,
                   ),
                   CustomField(
                     controller: passwordController,
-                    title: "Enter Your Password",
+                    title: "Password",
                     validator: Validators.validatePassword,
+                    icon: Icons.lock_outline_rounded,
+                    obscureText: true,
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 40),
                   CustomButton(
-                    title: "Create Account",
+                    title: "Sign up",
                     onPressed: () {
                       cubit.getSignUpMethod(
                         fullName: fullNameController.text,

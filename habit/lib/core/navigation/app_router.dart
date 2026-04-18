@@ -14,7 +14,7 @@ import 'package:habit/features/habit/presentation/cubit/habit_cubit.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.login,
+    initialLocation: Routes.habit,
     routes: [
       GoRoute(
         path: Routes.splash,
