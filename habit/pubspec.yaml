@@ -20,6 +20,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_dotenv: ^6.0.0
   flutter_hooks: ^0.21.3+1
+  flutter_launcher_icons: ^0.14.4
   flutter_secure_storage: ^10.0.0
   freezed_annotation: ^3.1.0
   get_it: ^9.2.1
@@ -28,6 +29,7 @@ dependencies:
   injectable: ^2.7.1+4
   json_annotation: ^4.11.0
   loading_animation_widget: ^1.3.0
+  lottie: ^3.3.3
   multiple_result: ^5.3.0
   package_info_plus: ^9.0.1
   sizer: ^3.1.3
@@ -45,9 +47,13 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/icons/
     - assets/images/
     - assets/images/logo/
     - assets/translations/
+    - assets/Animations/
     - .env
   uses-material-design: true
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets\fonts\Cairo\Cairo-VariableFont_slnt,wght.ttf

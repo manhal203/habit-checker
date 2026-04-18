@@ -16,8 +16,8 @@ class LoginFeatureScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
-    final emailController = useTextEditingController(text: "ma@gmail.com");
-    final passwordController = useTextEditingController(text: "123456789");
+    final emailController = useTextEditingController(text: "Manhal@gmail.com");
+    final passwordController = useTextEditingController(text: "12341234");
 
     return Scaffold(
       appBar: AppBar(),

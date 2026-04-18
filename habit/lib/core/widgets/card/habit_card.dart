@@ -48,18 +48,20 @@ class HabitCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Checkbox(
-                value: isCompleted,
-                activeColor: Colors.white,
-                checkColor: const Color.fromARGB(255, 141, 183, 212),
-                side: BorderSide(color: Colors.white),
-                onChanged: (value) {
-                  onChanged(value!);
-                },
+              Transform.scale(
+                scale: 1.3,
+                child: Checkbox(
+                  value: isCompleted,
+                  activeColor: Colors.white,
+                  checkColor: Color.fromARGB(255, 170, 210, 125),
+                  side: BorderSide(color: Colors.white),
+                  shape: RoundedRectangleBorder(borderRadius: .circular(10)),
+                  onChanged: (value) {
+                    onChanged(value!);
+                  },
+                ),
               ),
             ],
-
-
           ),
         ),
       ),

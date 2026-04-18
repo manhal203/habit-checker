@@ -14,7 +14,11 @@ class HabitCubit extends Cubit<HabitState> {
     result.when(
       (success) {
         final today = DateTime.now().toIso8601String().split('T').first;
-        emit(HabitSuccessState(habits: success, today: today));
+        if (success.isEmpty) {
+          emit(HabitIsEmptyState());
+        } else {
+          emit(HabitSuccessState(habits: success, today: today));
+        }
       },
       (whenError) {
         emit(HabitErrorState(message: whenError.message));

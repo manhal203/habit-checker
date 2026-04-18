@@ -6,6 +6,7 @@ import 'package:habit/core/navigation/routers.dart';
 import 'package:habit/core/widgets/card/habit_card.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_cubit.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_state.dart';
+import 'package:lottie/lottie.dart';
 
 class HabitFeatureScreen extends StatelessWidget {
   const HabitFeatureScreen({super.key});
@@ -18,6 +19,7 @@ class HabitFeatureScreen extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 200, 243, 146),
         foregroundColor: Colors.white,
         elevation: 4,
+        shape: CircleBorder(),
         child: Icon(Icons.add, size: 40),
         onPressed: () async {
           context.push(Routes.addHabit).then((value) {
@@ -53,7 +55,36 @@ class HabitFeatureScreen extends StatelessWidget {
         },
         child: BlocBuilder<HabitCubit, HabitState>(
           builder: (context, state) {
-            if (state is HabitSuccessState) {
+            if (state is HabitIsEmptyState) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset(
+                      'assets/Animations/empty ghost.json',
+                      height: 300,
+                    ),
+
+                    Text(
+                      "Start a new habit",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(255, 170, 210, 125),
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+
+                    SizedBox(height: 6),
+
+                    Text(
+                      "Track your daily habits",
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              );
+            } else if (state is HabitSuccessState) {
               return Column(
                 children: [
                   SizedBox(height: 20),
@@ -67,7 +98,11 @@ class HabitFeatureScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 10),
+                  SizedBox(height: 4),
+                  Text(
+                    state.today,
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
 
                   Expanded(
                     child: ListView.builder(
@@ -85,8 +120,9 @@ class HabitFeatureScreen extends StatelessWidget {
 
                           background: Container(
                             color: Colors.red,
-                            alignment: Alignment.centerRight,
-                            padding: .only(right: 20),
+                            alignment: Alignment.centerLeft,
+                            padding: .only(left: 20),
+
                             child: Icon(Icons.delete, color: Colors.white),
                           ),
 
@@ -114,7 +150,7 @@ class HabitFeatureScreen extends StatelessWidget {
                 ],
               );
             }
-            return Center(child: Text("Add new Habit"));
+            return SizedBox.shrink();
           },
         ),
       ),
