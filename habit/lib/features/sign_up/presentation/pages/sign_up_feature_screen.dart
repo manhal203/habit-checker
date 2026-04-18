@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -73,12 +75,15 @@ class SignUpFeatureScreen extends HookWidget {
                   CustomButton(
                     title: "Create Account",
                     onPressed: () {
-                      cubit.getSignUpMethod(
-                        username: usernameController.text,
-                        email: emailController.text,
-                        phone: phoneController.text,
-                        password: passwordController.text,
-                      );
+                      log(keyField.currentState!.validate().toString());
+                      if (keyField.currentState!.validate()) {
+                        cubit.getSignUpMethod(
+                          username: usernameController.text,
+                          email: emailController.text,
+                          phone: phoneController.text,
+                          password: passwordController.text,
+                        );
+                      }
                     },
                   ),
                 ],
