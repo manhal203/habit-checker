@@ -58,6 +58,7 @@ class HabitCard extends StatelessWidget {
                 },
               ),
             ],
+
           ),
         ),
       ),

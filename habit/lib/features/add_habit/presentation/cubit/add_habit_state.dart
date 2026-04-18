@@ -8,6 +8,9 @@ abstract class AddHabitState extends Equatable {
 }
 
 class AddHabitInitialState extends AddHabitState {}
+
+class AddHabitLoadingState extends AddHabitState {}
+
 class AddHabitSuccessState extends AddHabitState {}
 
 class AddHabitErrorState extends AddHabitState {

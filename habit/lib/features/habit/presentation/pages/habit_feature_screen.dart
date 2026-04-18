@@ -27,6 +27,16 @@ class HabitFeatureScreen extends StatelessWidget {
           });
         },
       ),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.go(Routes.login);
+            },
+            icon: Icon(Icons.exit_to_app, color: Colors.redAccent),
+          ),
+        ],
+      ),
 
       body: SafeArea(
         child: BlocListener<HabitCubit, HabitState>(

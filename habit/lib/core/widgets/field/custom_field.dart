@@ -5,7 +5,7 @@ class CustomField extends StatelessWidget {
     super.key,
     this.controller,
     required this.title,
-    required this.icon,
+    this.icon,
     this.obscureText = false,
     this.isNumber = false,
 

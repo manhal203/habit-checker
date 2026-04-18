@@ -11,6 +11,8 @@ class AddHabitCubit extends Cubit<AddHabitState> {
     required String title,
     required String description,
   }) async {
+    emit(AddHabitLoadingState());
+
     final result = await _addHabitUseCase.getAddHabit(
       title: title,
       description: description,

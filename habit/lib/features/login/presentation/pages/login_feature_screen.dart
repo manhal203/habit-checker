@@ -16,8 +16,8 @@ class LoginFeatureScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
+    final emailController = useTextEditingController(text: "moayad@gmail.com");
+    final passwordController = useTextEditingController(text: "123123123");
 
     return Scaffold(
       appBar: AppBar(),
@@ -41,6 +41,7 @@ class LoginFeatureScreen extends HookWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
+              spacing: 16,
               children: [
                 AnyImageView(
                   imagePath: 'assets/images/logo/habit_logo.png',
@@ -62,7 +63,9 @@ class LoginFeatureScreen extends HookWidget {
                   obscureText: true,
                   validator: Validators.validatePassword,
                 ),
+
                 SizedBox(height: 40),
+
                 CustomButton(
                   title: "Log in",
                   onPressed: () {
@@ -70,6 +73,12 @@ class LoginFeatureScreen extends HookWidget {
                       email: emailController.text,
                       password: passwordController.text,
                     );
+                  },
+                ),
+                CustomButton(
+                  title: "Sign Up",
+                  onPressed: () {
+                    context.push(Routes.signUp);
                   },
                 ),
               ],

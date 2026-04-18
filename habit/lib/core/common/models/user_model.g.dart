@@ -10,7 +10,7 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
   id: json['id'] as String,
   authId: json['auth_id'] as String,
   email: json['email'] as String,
-  fullName: json['full_name'] as String,
+  username: json['username'] as String,
   phoneNumber: json['phone_number'] as String,
   createdAt: json['created_at'] as String,
 );
@@ -20,7 +20,7 @@ Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
       'id': instance.id,
       'auth_id': instance.authId,
       'email': instance.email,
-      'full_name': instance.fullName,
+      'username': instance.username,
       'phone_number': instance.phoneNumber,
       'created_at': instance.createdAt,
     };
