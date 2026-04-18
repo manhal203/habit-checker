@@ -1,3 +1,4 @@
+import 'package:habit/core/utils/formatters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:habit/features/habit/data/models/habit_model.dart';
@@ -35,7 +36,7 @@ class HabitRemoteDataSource implements BaseHabitRemoteDataSource {
     required bool isCompleted,
   }) async {
     try {
-      final today = DateTime.now().toIso8601String().split("T").first;
+      final today = Formatters.formatDate(DateTime.now());
       final existingLog = await _supabase
           .from("habit_logs")
           .select()

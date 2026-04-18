@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habit/core/navigation/routers.dart';
+import 'package:habit/core/utils/formatters.dart';
 import 'package:habit/core/widgets/card/habit_card.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_cubit.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_state.dart';
@@ -12,6 +13,7 @@ class HabitFeatureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<HabitCubit>();
+    final String todayDate = Formatters.formatDate(DateTime.now());
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -59,7 +61,7 @@ class HabitFeatureScreen extends StatelessWidget {
                   SizedBox(height: 20),
 
                   Text(
-                    "Your habits for today",
+                    "Your habits for today ($todayDate)",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -76,7 +78,7 @@ class HabitFeatureScreen extends StatelessWidget {
                         final habit = state.habits[index];
 
                         final todayLog = habit.habitLog
-                            .where((log) => log.logDate == state.today)
+                            .where((log) => log.logDate == todayDate)
                             .toList();
 
                         return Dismissible(

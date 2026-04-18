@@ -13,8 +13,7 @@ class HabitCubit extends Cubit<HabitState> {
     final result = await _habitUseCase.getHabit();
     result.when(
       (success) {
-        final today = DateTime.now().toIso8601String().split('T').first;
-        emit(HabitSuccessState(habits: success, today: today));
+        emit(HabitSuccessState(habits: success));
       },
       (whenError) {
         emit(HabitErrorState(message: whenError.message));

@@ -12,8 +12,7 @@ class HabitInitialState extends HabitState {}
 
 class HabitSuccessState extends HabitState {
   final List<HabitEntity> habits;
-  final String today;
-  const HabitSuccessState({required this.habits, required this.today,});
+  const HabitSuccessState({required this.habits});
 
   @override
   List<Object?> get props => [habits];
