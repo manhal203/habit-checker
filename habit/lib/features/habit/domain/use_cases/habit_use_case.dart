@@ -17,4 +17,8 @@ class HabitUseCase {
   Future<Result<bool, Failure>> doneHabit({required String habitId, required bool isCompleted}) async {
     return _repositoryData.doneHabit(habitId: habitId,isCompleted: isCompleted);
   }
+
+  Future<Result<bool, Failure>> deleteHabitMethod({required String habitId}){
+    return _repositoryData.deleteHabitMethod(habitId: habitId);
+  }
 }

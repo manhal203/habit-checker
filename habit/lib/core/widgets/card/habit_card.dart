@@ -54,10 +54,11 @@ class HabitCard extends StatelessWidget {
                 checkColor: const Color.fromARGB(255, 141, 183, 212),
                 side: BorderSide(color: Colors.white),
                 onChanged: (value) {
-                  onChanged(value ?? false);
+                  onChanged(value!);
                 },
               ),
             ],
+
 
           ),
         ),

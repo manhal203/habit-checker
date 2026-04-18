@@ -12,13 +12,16 @@ class HabitInitialState extends HabitState {}
 
 class HabitSuccessState extends HabitState {
   final List<HabitEntity> habits;
-  const HabitSuccessState({required this.habits});
+  final String today;
+  const HabitSuccessState({required this.habits, required this.today,});
 
   @override
   List<Object?> get props => [habits];
 }
 
 class DoneHabitSuccessState extends HabitState {}
+
+class DeleteHabitSuccessState extends HabitState {}
 
 class HabitErrorState extends HabitState {
   final String message;

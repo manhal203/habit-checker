@@ -14,9 +14,8 @@ abstract class BaseAddHabitRemoteDataSource {
 @LazySingleton(as: BaseAddHabitRemoteDataSource)
 class AddHabitRemoteDataSource implements BaseAddHabitRemoteDataSource {
   final SupabaseClient _supabase;
-  final UserService _currentUser;
 
-  AddHabitRemoteDataSource(this._supabase, this._currentUser);
+  AddHabitRemoteDataSource(this._supabase);
 
   @override
   Future<bool> getAddHabit({
@@ -25,23 +24,11 @@ class AddHabitRemoteDataSource implements BaseAddHabitRemoteDataSource {
   }) async {
     try {
       final userId = _supabase.auth.currentUser!.id;
-      // log(userId);
-      // log("=÷=== ${_currentUser.getUser!.id}");
 
-
-      final response = await _supabase
-          .from("habits")
-          .insert({
-            "user_id": userId,
-            "title": title,
-            "description": description,
-          })
-          .select("id")
-          .single();
-
-      await _supabase.from("habit_logs").insert({
-        "habit_id": response['id'],
-        "log_date": DateTime.parse("2024-09-23").toIso8601String(),
+      await _supabase.from("habits").insert({
+        "user_id": userId,
+        "title": title,
+        "description": description,
       }).select();
 
       return true;
