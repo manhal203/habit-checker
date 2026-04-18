@@ -40,6 +40,7 @@ class LoginFeatureScreen extends HookWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
+              spacing: 16,
               children: [
                 CustomField(
                   controller: emailController,
@@ -49,7 +50,7 @@ class LoginFeatureScreen extends HookWidget {
                   controller: passwordController,
                   title: "Enter Your Password",
                 ),
-                SizedBox(height: 20),
+                
                 CustomButton(
                   title: "Login",
                   onPressed: () {
@@ -57,6 +58,12 @@ class LoginFeatureScreen extends HookWidget {
                       email: emailController.text,
                       password: passwordController.text,
                     );
+                  },
+                ),
+                CustomButton(
+                  title: "Sign Up",
+                  onPressed: () {
+                    context.push(Routes.signUp);
                   },
                 ),
               ],
