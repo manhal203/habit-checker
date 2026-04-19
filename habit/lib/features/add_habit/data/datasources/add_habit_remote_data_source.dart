@@ -1,3 +1,4 @@
+import 'package:habit/core/services/user_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:habit/core/errors/network_exceptions.dart';
@@ -12,8 +13,9 @@ abstract class BaseAddHabitRemoteDataSource {
 @LazySingleton(as: BaseAddHabitRemoteDataSource)
 class AddHabitRemoteDataSource implements BaseAddHabitRemoteDataSource {
   final SupabaseClient _supabase;
+  final UserService _currentUser;
 
-  AddHabitRemoteDataSource(this._supabase);
+  AddHabitRemoteDataSource(this._supabase, this._currentUser);
 
   @override
   Future<bool> getAddHabit({
@@ -21,7 +23,7 @@ class AddHabitRemoteDataSource implements BaseAddHabitRemoteDataSource {
     required String description,
   }) async {
     try {
-      final userId = _supabase.auth.currentUser!.id;
+      final userId = _currentUser.getUser!.id;
 
       await _supabase.from("habits").insert({
         "user_id": userId,
