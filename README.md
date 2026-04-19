@@ -73,17 +73,13 @@ The app ensures each user has their own personalized habit tracker with secure a
 
 ## 📸 Screenshots
 
-| Login | Sign Up |
-|---|---|
-| <img src="habit/assets/images/login.jpg" width="200"/> | <img src="habit/assets/images/signup.jpg" width="200"/> |
+| Login | Sign Up | Habits Screen |
+|---|---|---|
+| <img src="habit/assets/images/login.jpg" width="200"/> | <img src="habit/assets/images/signup.jpg" width="200"/> | <img src="habit/assets/images/habit.jpg" width="200"/> |
 
-| Habits Screen | Add Habit |
-|---|---|
-| <img src="habit/assets/images/habit.jpg" width="200"/> | <img src="habit/assets/images/add_habit.jpg" width="200"/> |
-
-| Sign Up | Empty State |
-|---|---|
-| <img src="habit/assets/images/empty.jpg" width="200"/> | <img src="habit/assets/images/habit_history.jpg" width="200"/> |
+| Add Habit | Habit History | Empty State |
+|---|---|---|
+| <img src="habit/assets/images/add_habit.jpg" width="200"/> | <img src="habit/assets/images/empty.jpg" width="200"/> | <img src="habit/assets/images/habit_history.jpg" width="200"/> |
 
 ---
 
