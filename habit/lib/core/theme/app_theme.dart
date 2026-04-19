@@ -15,6 +15,7 @@ abstract class AppTheme {
       error: AppColors.error,
     ),
     scaffoldBackgroundColor: Colors.white,
+    fontFamily: 'Cairo',
     textTheme: AppTextTheme.lightTextTheme,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
