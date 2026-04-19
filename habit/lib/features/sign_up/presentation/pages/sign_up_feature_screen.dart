@@ -35,7 +35,7 @@ class SignUpFeatureScreen extends HookWidget {
                 context.showLoading();
 
               case SignUpSuccessState _:
-                context.go(Routes.loading);
+                context.go(Routes.habit);
 
               case SignUpErrorState _:
                 context.showSnackBar(state.message, isError: true);
