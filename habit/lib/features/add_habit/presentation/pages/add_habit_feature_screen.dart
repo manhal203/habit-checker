@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habit/core/extensions/context_extensions.dart';
 import 'package:habit/core/utils/validators.dart';
+import 'package:habit/core/widgets/button/custom_button.dart';
 import 'package:habit/core/widgets/field/custom_field.dart';
 import 'package:habit/features/add_habit/presentation/cubit/add_habit_cubit.dart';
 import 'package:habit/features/add_habit/presentation/cubit/add_habit_state.dart';
@@ -42,6 +43,7 @@ class AddHabitFeatureScreen extends HookWidget {
           child: Form(
             key: keyField,
             child: Column(
+              spacing: 16,
               children: [
                 CustomField(
                   controller: titleController,
@@ -52,7 +54,7 @@ class AddHabitFeatureScreen extends HookWidget {
                   controller: descriptionController,
                   title: 'Add Description',
                 ),
-                FilledButton(
+                CustomButton(
                   onPressed: () {
                     if (keyField.currentState!.validate()) {
                       cubit.getAddHabitMethod(
@@ -61,7 +63,7 @@ class AddHabitFeatureScreen extends HookWidget {
                       );
                     }
                   },
-                  child: Text("save"),
+                  title: "save",
                 ),
               ],
             ),

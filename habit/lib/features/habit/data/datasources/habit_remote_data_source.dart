@@ -1,3 +1,4 @@
+import 'package:habit/core/services/user_service.dart';
 import 'package:habit/core/utils/formatters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -13,12 +14,13 @@ abstract class BaseHabitRemoteDataSource {
 @LazySingleton(as: BaseHabitRemoteDataSource)
 class HabitRemoteDataSource implements BaseHabitRemoteDataSource {
   final SupabaseClient _supabase;
-  HabitRemoteDataSource(this._supabase);
+  final UserService _currentUser;
+  HabitRemoteDataSource(this._supabase, this._currentUser);
 
   @override
   Future<List<HabitModel>> getHabit() async {
     try {
-      final userId = _supabase.auth.currentUser!.id;
+      final userId = _currentUser.getUser!.id;
       final response = await _supabase
           .from("habits")
           .select("*,habit_logs(*)")
@@ -66,7 +68,7 @@ class HabitRemoteDataSource implements BaseHabitRemoteDataSource {
   @override
   Future<bool> deleteHabit({required String habitId}) async {
     try {
-      final userId = _supabase.auth.currentUser!.id;
+      final userId = _currentUser.getUser!.id;
       await _supabase
           .from("habits")
           .delete()
