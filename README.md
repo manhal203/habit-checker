@@ -40,6 +40,7 @@ The app ensures each user has their own personalized habit tracker with secure a
 - ✅ Daily completion tracking per habit
 - 📊 Habit logs stored in database
 - 🔄 Real-time data updates per user
+- 📅 Habit History: tap a habit to view full daily logs (completed / not completed) for today and past dates
 - 🧩 Clean Architecture (Data / Domain / Presentation)
 - ⚡ State Management using Cubit
 
@@ -80,9 +81,9 @@ The app ensures each user has their own personalized habit tracker with secure a
 |---|---|
 | <img src="habit/assets/images/habit.jpg" width="200"/> | <img src="habit/assets/images/add_habit.jpg" width="200"/> |
 
-| Empty State |
-|---|
-| <img src="habit/assets/images/empty.jpg" width="200"/> |
+| Sign Up | Empty State |
+|---|---|
+| <img src="habit/assets/images/empty.jpg" width="200"/> | <img src="habit/assets/images/habit_history.jpg" width="200"/> |
 
 ---
 
