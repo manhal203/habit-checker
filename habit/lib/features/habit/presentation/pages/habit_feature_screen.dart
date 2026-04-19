@@ -95,7 +95,8 @@ class HabitFeatureScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: 20),
                     Text(
-                      "Your habits for today ($todayDate)",
+                      "Your habits for today\n$todayDate",
+                      textAlign: .center,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -122,8 +123,8 @@ class HabitFeatureScreen extends StatelessWidget {
 
                           background: Container(
                             color: Colors.red,
-                            alignment: Alignment.centerLeft,
-                            padding: .only(left: 20),
+                            alignment: Alignment.centerRight,
+                            padding: .only(right: 20),
 
                             child: Icon(Icons.delete, color: Colors.white),
                           ),
