@@ -79,7 +79,7 @@ class HabitFeatureScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 170, 210, 125),
+                        color: AppColors.darkGreen,
                         letterSpacing: 0.5,
                       ),
                     ),
