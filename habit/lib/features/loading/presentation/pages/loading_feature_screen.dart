@@ -14,7 +14,7 @@ class LoadingFeatureScreen extends StatelessWidget {
     final _ = context.read<LoadingCubit>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Loading Feature Screen')),
+      appBar: AppBar(),
       body: BlocListener<LoadingCubit, LoadingState>(
         listener: (context, state) {
           context.hideLoading();
@@ -29,10 +29,10 @@ class LoadingFeatureScreen extends StatelessWidget {
               break;
 
             default:
-            context.go(Routes.login);
+              context.go(Routes.login);
           }
         },
-        child: LoadingWidget()
+        child: LoadingWidget(),
       ),
     );
   }
