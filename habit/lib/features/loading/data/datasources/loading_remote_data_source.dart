@@ -20,6 +20,7 @@ class LoadingRemoteDataSource implements BaseLoadingRemoteDataSource {
   Future<LoadingModel> getLoading() async {
     try {
       final userToken = _supabase.auth.currentSession?.accessToken;
+
       final isUser = userToken != null;
       final isExpired = _supabase.auth.currentSession?.isExpired ?? true;
 
@@ -29,7 +30,7 @@ class LoadingRemoteDataSource implements BaseLoadingRemoteDataSource {
             .select()
             .eq("id", _supabase.auth.currentUser!.id)
             .single();
-
+        print(userProfile.toString());
         final UserModel user = UserModel.fromJson(userProfile);
 
         _currentUser.setUser = user;
@@ -39,6 +40,7 @@ class LoadingRemoteDataSource implements BaseLoadingRemoteDataSource {
 
       return LoadingModel(isLogin: false);
     } catch (error) {
+      print(error);
       throw FailureExceptions.getException(error);
     }
   }

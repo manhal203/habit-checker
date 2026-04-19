@@ -26,9 +26,16 @@ class HabitFeatureScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is HabitSuccessState) {
               int allLogs = 0;
-              state.habits.map((item) {allLogs += item.habitLog.length;}).toList();
+              state.habits.map((item) {
+                allLogs += item.habitLog.length;
+              }).toList();
               int completedLogs = 0;
-              state.habits.map((item) {completedLogs += item.habitLog.fold(0, (count , item2) => item2.isCompleted ? count + 1 : count );}).toList();
+              state.habits.map((item) {
+                completedLogs += item.habitLog.fold(
+                  0,
+                  (count, item2) => item2.isCompleted ? count + 1 : count,
+                );
+              }).toList();
               int uncompletedLogs = allLogs - completedLogs;
 
               return Column(

@@ -10,7 +10,7 @@ abstract class UserModel with _$UserModel {
     required String id,
     required String authId,
     required String email,
-    required String username,
+    String? username,
     required String phoneNumber,
     required String createdAt,
   }) = _UserModel;
