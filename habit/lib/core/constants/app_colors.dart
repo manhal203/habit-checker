@@ -26,4 +26,8 @@ class AppColors {
   static const Color border = Color(0xFFE5E7EB);
   static const Color divider = Color(0xFFE5E7EB);
   static const Color disabled = Color(0xFFD1D5DB);
+
+  // Custom Colors
+  static const Color darkGreen = Color.fromARGB(255, 170, 210, 125);
+  static const Color lightGreen = Color.fromARGB(255, 200, 243, 146);
 }
