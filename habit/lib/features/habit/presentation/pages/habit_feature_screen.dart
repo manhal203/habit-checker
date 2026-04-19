@@ -7,7 +7,6 @@ import 'package:habit/core/extensions/context_extensions.dart';
 import 'package:habit/core/navigation/routers.dart';
 import 'package:habit/core/utils/formatters.dart';
 import 'package:habit/core/widgets/card/habit_card.dart';
-import 'package:habit/features/habit/domain/entities/habit_log_entity.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_cubit.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_state.dart';
 
