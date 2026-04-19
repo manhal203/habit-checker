@@ -47,7 +47,7 @@ class SessionExpiredFailure extends Failure {
 }
 
 class InvalidCredentialsFailure extends Failure {
-  const InvalidCredentialsFailure([super.message = 'Invalid credentials']);
+  const InvalidCredentialsFailure([super.message = 'Email or Password is not correct']);
 }
 
 class EmailAlreadyExistsFailure extends Failure {

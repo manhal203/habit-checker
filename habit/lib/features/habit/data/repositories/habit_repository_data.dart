@@ -29,18 +29,25 @@ class HabitRepositoryData implements HabitRepositoryDomain {
     required bool isCompleted,
   }) async {
     try {
-      final response = await remoteDataSource.doneHabit(habitId: habitId,isCompleted: isCompleted);
+      final response = await remoteDataSource.doneHabit(
+        habitId: habitId,
+        isCompleted: isCompleted,
+      );
       return Success(response);
     } catch (error) {
       return Error(FailureExceptions.getException(error));
     }
   }
-  
+
   @override
-  Future<Result<bool, Failure>> deleteHabitMethod({required String habitId}) async {
+  Future<Result<bool, Failure>> deleteHabitMethod({
+    required String habitId,
+  }) async {
     try {
       final response = await remoteDataSource.deleteHabit(habitId: habitId);
       return Success(response);
+    } on Failure catch (error) {
+      return Error(error);
     } catch (error) {
       return Error(FailureExceptions.getException(error));
     }

@@ -167,7 +167,7 @@ class FailureExceptions {
       ),
 
       // ─── Validation ───
-      'validation_failed' => const ValidationFailure('Invalid data'),
+      'validation_failed' => const ValidationFailure('Please Fill the Text Fields'),
       'bad_json' => const FormatFailure('Invalid request format'),
 
       // ─── Invite ───
