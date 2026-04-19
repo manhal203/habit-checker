@@ -90,6 +90,9 @@ The app ensures each user has their own personalized habit tracker with secure a
 
 Quick overview of Plantify AI functionality:
 
+https://github.com/flutter-gg-2026/personal-habit-tracker-app-m_group/blob/main/assets/record/habit_recording.mp4
+
+
 https://github.com/user-attachments/assets/9c5cd0d1-97b7-4130-bca0-b26325cc93b8
 
 ---
