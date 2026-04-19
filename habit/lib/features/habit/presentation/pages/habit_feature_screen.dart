@@ -29,8 +29,8 @@ class HabitFeatureScreen extends StatelessWidget {
               state.habits.map((item) {allLogs += item.habitLog.length;}).toList();
               int completedLogs = 0;
               state.habits.map((item) {completedLogs += item.habitLog.fold(0, (count , item2) => item2.isCompleted ? count + 1 : count );}).toList();
+              int uncompletedLogs = allLogs - completedLogs;
 
-              print("all logs: $allLogs ==== completed`; $completedLogs");
               return Column(
                 mainAxisAlignment: .center,
                 spacing: 20,
@@ -47,20 +47,20 @@ class HabitFeatureScreen extends StatelessWidget {
 
                   CountCardWidget(
                     color: const Color.fromARGB(255, 242, 231, 130),
-                    title: "All Tasks",
-                    count: 57,
+                    title: "All Habits Logs",
+                    count: allLogs,
                   ),
 
                   CountCardWidget(
                     color: AppColors.lightGreen,
-                    title: "Completed Tasks",
-                    count: 13,
+                    title: "Completed Logs",
+                    count: completedLogs,
                   ),
 
                   CountCardWidget(
                     color: const Color.fromARGB(255, 245, 143, 143),
-                    title: "Uncompleted Tasks",
-                    count: 7,
+                    title: "Uncompleted Logs",
+                    count: uncompletedLogs,
                   ),
 
                   SizedBox(height: 300),
