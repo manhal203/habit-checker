@@ -11,6 +11,9 @@ import 'package:habit/features/add_habit/presentation/pages/add_habit_feature_sc
 import 'package:habit/features/add_habit/presentation/cubit/add_habit_cubit.dart';
 import 'package:habit/features/habit/presentation/pages/habit_feature_screen.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_cubit.dart';
+import 'package:habit/features/loading/presentation/pages/loading_feature_screen.dart';
+import 'package:habit/features/loading/presentation/cubit/loading_cubit.dart';
+
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -54,7 +57,15 @@ class AppRouter {
           child: const HabitFeatureScreen(),
         ),
       ),
-    ],
+    
+  GoRoute(
+    path: Routes.loading,
+    builder: (context, state) => BlocProvider(
+          create: (context) => LoadingCubit(GetIt.I.get()),
+          child: const LoadingFeatureScreen(),
+        ),
+  ),
+],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),

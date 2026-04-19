@@ -5,6 +5,7 @@ import 'package:habit/features/login/di/login_di.dart';
 import 'package:habit/features/sign_up/di/sign_up_di.dart';
 import 'package:habit/features/add_habit/di/add_habit_di.dart';
 import 'package:habit/features/habit/di/habit_di.dart';
+import 'package:habit/features/loading/di/loading_di.dart';
 
 @InjectableInit(
   initializerName: 'init',
@@ -19,4 +20,5 @@ Future<void> configureDependencies() async {
   configureSignUp(getIt);
   configureAddHabit(getIt);
   configureHabit(getIt);
+    configureLoading(getIt);
 }
