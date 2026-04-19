@@ -7,6 +7,7 @@ import 'package:habit/core/extensions/context_extensions.dart';
 import 'package:habit/core/navigation/routers.dart';
 import 'package:habit/core/utils/formatters.dart';
 import 'package:habit/core/widgets/card/habit_card.dart';
+import 'package:habit/features/habit/domain/entities/habit_log_entity.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_cubit.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_state.dart';
 
@@ -124,27 +125,49 @@ class HabitFeatureScreen extends StatelessWidget {
 
                                         Divider(),
 
-                                        ...habit.habitLog.map(
-                                          (item) => Column(
-                                            children: [
-                                              ListTile(
-                                                title: Text(item.logDate),
-                                                trailing: Icon(
-                                                  item.isCompleted
-                                                      ? Icons
-                                                            .check_circle_outline
-                                                      : Icons.cancel_outlined,
-                                                  color: item.isCompleted
-                                                      ? Colors.green
-                                                      : Colors.red,
-                                                ),
+                                        ...([...habit.habitLog]..sort(
+                                              (a, b) => b.logDate.compareTo(
+                                                a.logDate,
                                               ),
-                                              Divider(
-                                                color: AppColors.textHint,
+                                            ))
+                                            .map(
+                                              (item) => Column(
+                                                children: [
+                                                  ListTile(
+                                                    title: Text(
+                                                      item.logDate,
+                                                      style: TextStyle(
+                                                        color:
+                                                            AppColors.textHint,
+                                                      ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      item.isCompleted
+                                                          ? Icons
+                                                                .check_circle_outline
+                                                          : Icons
+                                                                .cancel_outlined,
+                                                      color: item.isCompleted
+                                                          ? const Color.fromARGB(
+                                                              170,
+                                                              76,
+                                                              175,
+                                                              79,
+                                                            )
+                                                          : const Color.fromARGB(
+                                                              170,
+                                                              244,
+                                                              67,
+                                                              54,
+                                                            ),
+                                                    ),
+                                                  ),
+                                                  Divider(
+                                                    color: AppColors.textHint,
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                        ),
+                                            ),
                                       ],
                                     ),
                                   ),
