@@ -8,6 +8,9 @@ abstract class LoadingState extends Equatable {
 }
 
 class LoadingInitialState extends LoadingState {}
+
+class LoadingCheckingState extends LoadingState {}
+
 class LoadingSuccessState extends LoadingState {}
 
 class LoadingErrorState extends LoadingState {

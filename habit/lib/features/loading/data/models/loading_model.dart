@@ -6,9 +6,7 @@ part 'loading_model.g.dart';
 @freezed
 abstract class LoadingModel with _$LoadingModel {
   const factory LoadingModel({
-    required int id,
-    required String firstName,
-    required String lastName,
+    required bool isLogin,
     
   }) = _LoadingModel;
 
@@ -19,6 +17,6 @@ abstract class LoadingModel with _$LoadingModel {
 
 extension LoadingModelMapper on LoadingModel {
   LoadingEntity toEntity() {
-    return LoadingEntity(id: id, firstName: firstName, lastName: lastName);
+    return LoadingEntity(isLogin: isLogin);
   }
   }

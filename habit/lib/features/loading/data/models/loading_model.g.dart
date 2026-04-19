@@ -7,15 +7,7 @@ part of 'loading_model.dart';
 // **************************************************************************
 
 _LoadingModel _$LoadingModelFromJson(Map<String, dynamic> json) =>
-    _LoadingModel(
-      id: (json['id'] as num).toInt(),
-      firstName: json['firstName'] as String,
-      lastName: json['lastName'] as String,
-    );
+    _LoadingModel(isLogin: json['isLogin'] as bool);
 
 Map<String, dynamic> _$LoadingModelToJson(_LoadingModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
-    };
+    <String, dynamic>{'isLogin': instance.isLogin};

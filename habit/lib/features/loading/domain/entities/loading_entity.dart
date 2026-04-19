@@ -1,16 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 class LoadingEntity extends Equatable {
-  final int id;
-  final String firstName;
-  final String lastName;
+  final bool isLogin;
 
   const LoadingEntity({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
+    required this.isLogin,
   });
 
   @override
-  List<Object?> get props => [firstName, lastName, id];
+  List<Object?> get props => [isLogin];
 }
