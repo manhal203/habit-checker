@@ -12,8 +12,6 @@ class HabitCubit extends Cubit<HabitState> {
   Future<void> getHabitMethod() async {
     emit(HabitLoadingState());
 
-    await Future.delayed(Duration(seconds: 2));
-
     final result = await _habitUseCase.getHabit();
     result.when(
       (success) {

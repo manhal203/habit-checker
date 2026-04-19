@@ -7,8 +7,10 @@ import 'package:habit/core/extensions/context_extensions.dart';
 import 'package:habit/core/navigation/routers.dart';
 import 'package:habit/core/utils/formatters.dart';
 import 'package:habit/core/widgets/card/habit_card.dart';
+import 'package:habit/core/widgets/loading_widget.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_cubit.dart';
 import 'package:habit/features/habit/presentation/cubit/habit_state.dart';
+import 'package:habit/features/habit/presentation/widgets/count_card_widget.dart';
 import 'package:lottie/lottie.dart';
 
 class HabitFeatureScreen extends StatelessWidget {
@@ -19,6 +21,56 @@ class HabitFeatureScreen extends StatelessWidget {
     final String todayDate = Formatters.formatDate(DateTime.now());
 
     return Scaffold(
+      drawer: Drawer(
+        child: BlocBuilder<HabitCubit, HabitState>(
+          builder: (context, state) {
+            if (state is HabitSuccessState) {
+              int allLogs = 0;
+              state.habits.map((item) {allLogs += item.habitLog.length;}).toList();
+              int completedLogs = 0;
+              state.habits.map((item) {completedLogs += item.habitLog.fold(0, (count , item2) => item2.isCompleted ? count + 1 : count );}).toList();
+
+              print("all logs: $allLogs ==== completed`; $completedLogs");
+              return Column(
+                mainAxisAlignment: .center,
+                spacing: 20,
+                children: [
+                  Text(
+                    'Habit Analysis',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: .bold,
+                      color: AppColors.darkGreen,
+                    ),
+                  ),
+                  Divider(color: AppColors.divider),
+
+                  CountCardWidget(
+                    color: const Color.fromARGB(255, 242, 231, 130),
+                    title: "All Tasks",
+                    count: 57,
+                  ),
+
+                  CountCardWidget(
+                    color: AppColors.lightGreen,
+                    title: "Completed Tasks",
+                    count: 13,
+                  ),
+
+                  CountCardWidget(
+                    color: const Color.fromARGB(255, 245, 143, 143),
+                    title: "Uncompleted Tasks",
+                    count: 7,
+                  ),
+
+                  SizedBox(height: 300),
+                ],
+              );
+            }
+            return LoadingWidget();
+          },
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.darkGreen,
         foregroundColor: Colors.white,
@@ -44,14 +96,18 @@ class HabitFeatureScreen extends StatelessWidget {
             onPressed: () {
               context.go(Routes.login);
             },
-            icon: Icon(Icons.exit_to_app, color: Colors.redAccent),
+            icon: Icon(
+              Icons.exit_to_app,
+              color: Color.fromARGB(255, 245, 143, 143),
+              size: 25,
+            ),
           ),
         ],
       ),
       body: BlocListener<HabitCubit, HabitState>(
         listener: (context, state) {
           context.hideLoading();
-          if(state is HabitLoadingState){
+          if (state is HabitLoadingState) {
             context.showLoading();
           }
           if (state is DoneHabitSuccessState ||
