@@ -10,6 +10,9 @@ abstract class HabitState extends Equatable {
 
 class HabitInitialState extends HabitState {}
 
+class HabitLoadingState extends HabitState {}
+
+
 class HabitSuccessState extends HabitState {
   final List<HabitEntity> habits;
   const HabitSuccessState({required this.habits});

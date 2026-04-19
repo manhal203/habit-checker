@@ -19,7 +19,7 @@ class HabitFeatureScreen extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 200, 243, 146),
+        backgroundColor: AppColors.darkGreen,
         foregroundColor: Colors.white,
         elevation: 4,
         child: Icon(Icons.add, size: 40),
@@ -48,6 +48,10 @@ class HabitFeatureScreen extends StatelessWidget {
       ),
       body: BlocListener<HabitCubit, HabitState>(
         listener: (context, state) {
+          context.hideLoading();
+          if(state is HabitLoadingState){
+            context.showLoading();
+          }
           if (state is DoneHabitSuccessState ||
               state is DeleteHabitSuccessState) {
             context.read<HabitCubit>().getHabitMethod();
@@ -69,7 +73,7 @@ class HabitFeatureScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 170, 210, 125),
+                        color: AppColors.darkGreen,
                       ),
                     ),
 
@@ -112,12 +116,7 @@ class HabitFeatureScreen extends StatelessWidget {
                                           "Habit History",
                                           style: TextStyle(
                                             fontSize: 24,
-                                            color: Color.fromARGB(
-                                              255,
-                                              170,
-                                              210,
-                                              125,
-                                            ),
+                                            color: AppColors.darkGreen,
                                             fontWeight: .bold,
                                           ),
                                         ),
