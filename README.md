@@ -85,9 +85,9 @@ The app ensures each user has their own personalized habit tracker with secure a
 
 ## 🎬 Demo Video
 
-Quick overview of Plantify AI functionality:
+Quick overview of Habit Checker functionality:
 
-https://github.com/user-attachments/assets/9c5cd0d1-97b7-4130-bca0-b26325cc93b8
+https://drive.google.com/file/d/1tWHCw5GxecegfJrm3AXCYX6y2tx_CWAk/view?usp=sharing
 
 ---
 
@@ -111,6 +111,6 @@ https://github.com/user-attachments/assets/9c5cd0d1-97b7-4130-bca0-b26325cc93b8
 
 ## ⚙️ Setup & Installation
 
-1. Clone the repository: `git clone https://github.com/flutter-gg-2026/personal-habit-tracker-app-m_group.git`
+1. Clone the repository: `git clone https://github.com/manhal203/habit-checker.git`
 2. Install dependencies: `flutter pub get`
 3. Run the app: `flutter run`
